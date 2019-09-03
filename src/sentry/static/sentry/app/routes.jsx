@@ -255,13 +255,13 @@ function routes() {
         name="Incident Rules"
         path="incident-rules/"
         componentPromise={() =>
-          import(/* webpackChunkName: "ProjectIncidentRules" */ 'app/views/settings/projectIncidentRules')
+          import(/* webpackChunkName: "OrganizationIncidentRules" */ 'app/views/settings/organizationIncidentRules')
         }
         component={errorHandler(LazyLoad)}
       >
         <IndexRoute
           componentPromise={() =>
-            import(/* webpackChunkName: "IncidentRulesList" */ 'app/views/settings/projectIncidentRules/list')
+            import(/* webpackChunkName: "IncidentRulesList" */ 'app/views/settings/organizationIncidentRules/list')
           }
           component={errorHandler(LazyLoad)}
         />
@@ -269,7 +269,7 @@ function routes() {
           name="New Incident Rule"
           path="new/"
           componentPromise={() =>
-            import(/* webpackChunkName: "IncidentRulesCreate" */ 'app/views/settings/projectIncidentRules/create')
+            import(/* webpackChunkName: "IncidentRulesCreate" */ 'app/views/settings/organizationIncidentRules/create')
           }
           component={errorHandler(LazyLoad)}
         />
@@ -277,7 +277,7 @@ function routes() {
           name="Edit Incident Rule"
           path=":incidentRuleId/"
           componentPromise={() =>
-            import(/* webpackChunkName: "IncidentRulesDetails" */ 'app/views/settings/projectIncidentRules/details')
+            import(/* webpackChunkName: "IncidentRulesDetails" */ 'app/views/settings/organizationIncidentRules/details')
           }
           component={errorHandler(LazyLoad)}
         />
