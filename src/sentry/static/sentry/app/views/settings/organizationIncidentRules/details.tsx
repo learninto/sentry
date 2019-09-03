@@ -15,20 +15,16 @@ type State = {
 
 type RouteParams = {
   orgId: string;
-  projectId: string;
   incidentRuleId: string;
 };
 type Props = RouteComponentProps<RouteParams, {}>;
 
 class IncidentRulesDetails extends AsyncView<Props, State> {
   getEndpoints() {
-    const {orgId, projectId, incidentRuleId} = this.props.params;
+    const {orgId, incidentRuleId} = this.props.params;
 
     return [
-      ['rule', `/projects/${orgId}/${projectId}/alert-rules/${incidentRuleId}/`] as [
-        string,
-        string
-      ],
+      ['rule', `/projects/${orgId}/alert-rules/${incidentRuleId}/`] as [string, string],
     ];
   }
 
@@ -37,14 +33,13 @@ class IncidentRulesDetails extends AsyncView<Props, State> {
   };
 
   renderBody() {
-    const {orgId, projectId, incidentRuleId} = this.props.params;
+    const {orgId, incidentRuleId} = this.props.params;
     return (
       <div>
         <SettingsPageHeader title={t('Edit Incident Rule')} />
 
         <RuleForm
           orgId={orgId}
-          projectId={projectId}
           incidentRuleId={incidentRuleId}
           onSubmitSuccess={this.handleSubmitSuccess}
           initialData={this.state.rule}

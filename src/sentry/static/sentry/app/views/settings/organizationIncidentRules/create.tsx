@@ -6,27 +6,21 @@ import SettingsPageHeader from 'app/views/settings/components/settingsPageHeader
 
 import RuleForm from './ruleForm';
 
-type RouteParams = {orgId: string; projectId: string};
+type RouteParams = {orgId: string};
 
 class IncidentRulesCreate extends React.Component<RouteComponentProps<RouteParams, {}>> {
   handleSubmitSuccess = data => {
-    const {orgId, projectId} = this.props.params;
-    this.props.router.push(
-      `/settings/${orgId}/projects/${projectId}/incident-rules/${data.id}/`
-    );
+    const {orgId} = this.props.params;
+    this.props.router.push(`/settings/${orgId}/incident-rules/${data.id}/`);
   };
 
   render() {
-    const {orgId, projectId} = this.props.params;
+    const {orgId} = this.props.params;
 
     return (
       <div>
         <SettingsPageHeader title={t('New Incident Rule')} />
-        <RuleForm
-          orgId={orgId}
-          projectId={projectId}
-          onSubmitSuccess={this.handleSubmitSuccess}
-        />
+        <RuleForm orgId={orgId} onSubmitSuccess={this.handleSubmitSuccess} />
       </div>
     );
   }
