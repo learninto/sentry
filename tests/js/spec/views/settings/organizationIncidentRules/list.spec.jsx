@@ -6,15 +6,15 @@ import IncidentRulesList from 'app/views/settings/organizationIncidentRules/list
 
 describe('Incident Rules List', function() {
   it('renders', function() {
-    const {organization, project, routerContext} = initializeOrg();
+    const {organization, routerContext} = initializeOrg();
     const rule = TestStubs.IncidentRule();
     const req = MockApiClient.addMockResponse({
-      url: `/projects/${organization.slug}/${project.slug}/alert-rules/`,
+      url: `/projects/${organization.slug}/alert-rules/`,
       body: [rule],
     });
     const wrapper = mount(
       <IncidentRulesList
-        params={{orgId: organization.slug, projectId: project.slug}}
+        params={{orgId: organization.slug}}
         organization={organization}
       />,
       routerContext

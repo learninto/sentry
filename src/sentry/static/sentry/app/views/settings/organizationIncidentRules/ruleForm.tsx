@@ -507,23 +507,14 @@ class RuleForm extends React.Component<Props, State> {
 }
 
 type RuleFormContainerProps = {
-  api: Client;
-  config: Config;
-  organization: Organization;
-  project: Project;
-  orgId: string;
-  projectId: string;
-  incidentRuleId?: string;
   initialData?: IncidentRule;
+  orgId: string;
+  incidentRuleId?: string;
   onSubmitSuccess?: Function;
-};
+} & React.ComponentProps<typeof RuleForm>;
 
 function RuleFormContainer({
-  api,
-  organization,
-  project,
   orgId,
-  projectId,
   incidentRuleId,
   initialData,
   onSubmitSuccess,
@@ -532,7 +523,7 @@ function RuleFormContainer({
   return (
     <Form
       apiMethod={incidentRuleId ? 'PUT' : 'POST'}
-      apiEndpoint={`/projects/${orgId}/${projectId}/alert-rules/${
+      apiEndpoint={`/projects/${orgId}/alert-rules/${
         incidentRuleId ? `${incidentRuleId}/` : ''
       }`}
       initialData={{
@@ -545,13 +536,7 @@ function RuleFormContainer({
       saveOnBlur={false}
       onSubmitSuccess={onSubmitSuccess}
     >
-      <RuleForm
-        api={api}
-        project={project}
-        organization={organization}
-        initialData={initialData}
-        {...props}
-      />
+      <RuleForm initialData={initialData} {...props} />
     </Form>
   );
 }
