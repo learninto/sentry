@@ -20,6 +20,7 @@ import {DEFAULT_EVENT_VIEW_V1} from './data';
 import {MetaType, getFieldRenderer} from './utils';
 import EventView from './eventView';
 import SortLink from './sortLink';
+import TableResizable from 'app/components/tableResizable';
 
 type DataRow = {
   [key: string]: string;
@@ -119,18 +120,26 @@ class Table extends React.PureComponent<Props, State> {
     const {organization, location} = this.props;
     const {pageLinks, eventView, loading, dataPayload, error} = this.state;
 
+    console.log('dataPayload', dataPayload);
+
     return (
-      <Container>
-        <TableView
-          eventView={eventView}
-          organization={organization}
-          dataPayload={dataPayload}
-          isLoading={loading}
-          location={location}
-          error={error}
-        />
-        <Pagination pageLinks={pageLinks} />
-      </Container>
+      <>
+        <div>
+          <TableResizable />
+        </div>
+
+        <Container>
+          <TableView
+            eventView={eventView}
+            organization={organization}
+            dataPayload={dataPayload}
+            isLoading={loading}
+            location={location}
+            error={error}
+          />
+          <Pagination pageLinks={pageLinks} />
+        </Container>
+      </>
     );
   }
 }
@@ -269,7 +278,9 @@ class TableView extends React.Component<TableViewProps> {
       return this.renderError();
     }
     return (
-      <PanelGrid numOfCols={eventView.numOfColumns()}>{this.renderTable()}</PanelGrid>
+      <>
+        <PanelGrid numOfCols={eventView.numOfColumns()}>{this.renderTable()}</PanelGrid>
+      </>
     );
   }
 }
@@ -309,7 +320,6 @@ const PanelHeaderCell = styled('div')`
   font-weight: 600;
   text-transform: uppercase;
   border-bottom: 1px solid ${p => p.theme.borderDark};
-  border-radius: ${p => p.theme.borderRadius} ${p => p.theme.borderRadius} 0 0;
   background: ${p => p.theme.offWhite};
   line-height: 1;
 
@@ -332,9 +342,7 @@ type PanelGridInfoProps = {
 
 const PanelGridInfo = styled('div')<PanelGridInfoProps>`
   ${(props: PanelGridInfoProps) => {
-    return `
-  grid-column: 1 / span ${props.numOfCols};
-  `;
+    return `grid-column: 1 / span ${props.numOfCols};`;
   }};
 `;
 

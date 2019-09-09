@@ -65,6 +65,9 @@ export default class Events extends React.Component<EventsProps> {
           query={query}
           onSearch={this.handleSearch}
         />
+
+        {/* wip(leedongwei) */}
+
         <Container>
           <Table organization={organization} location={location} />
           <Tags eventView={eventView} organization={organization} location={location} />
