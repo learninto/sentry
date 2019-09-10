@@ -125,8 +125,12 @@ class Table extends React.PureComponent<Props, State> {
     return (
       <>
         <div>
-          <TableResizable />
+          <TableResizable
+            isEditable={true} // todo(leedongwei): Use feature-flag here
+          />
         </div>
+
+        <br />
 
         <Container>
           <TableView
