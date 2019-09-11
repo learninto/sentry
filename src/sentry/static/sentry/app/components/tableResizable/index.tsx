@@ -10,8 +10,9 @@ import {
   Grid,
   GridRow,
   GridHead,
-  GridHeadCell,
+  GridHeadCell as GridHeadCellStyle,
   GridHeadCellButton,
+  GridHeadCellResizer,
   GridBody,
   GridBodyCell,
   GridEditGroup,
@@ -59,7 +60,7 @@ class TableResizable extends React.Component<TableResizableProps, TableResizable
   }
 
   toggleColumnAdd() {
-    this.setState({isEditing: !this.state.isEditing});
+    // this.setState({isEditing: !this.state.isEditing});
   }
 
   toggleColumnEdit() {
@@ -72,31 +73,11 @@ class TableResizable extends React.Component<TableResizableProps, TableResizable
     return (
       <GridHead>
         <GridRow>
-          <GridHeadCell>
-            <GridHeadCellButton isEditing={isEditing}>
-              1 leedongwei head
-            </GridHeadCellButton>
-          </GridHeadCell>
-          <GridHeadCell>
-            <GridHeadCellButton isEditing={isEditing}>
-              2 leedongwei head
-            </GridHeadCellButton>
-          </GridHeadCell>
-          <GridHeadCell>
-            <GridHeadCellButton isEditing={isEditing}>
-              3 leedongwei head leedongwei head leedongwei head
-            </GridHeadCellButton>
-          </GridHeadCell>
-          <GridHeadCell>
-            <GridHeadCellButton isEditing={isEditing}>
-              4 leedongwei head
-            </GridHeadCellButton>
-          </GridHeadCell>
-          <GridHeadCell>
-            <GridHeadCellButton isEditing={isEditing}>
-              5 leedongwei head
-            </GridHeadCellButton>
-          </GridHeadCell>
+          <GridHeadCell isEditing={isEditing}>1 leedongwei head</GridHeadCell>
+          <GridHeadCell isEditing={isEditing}>2 leedongwei head</GridHeadCell>
+          <GridHeadCell isEditing={isEditing}>3 leedongwei head</GridHeadCell>
+          <GridHeadCell isEditing={isEditing}>4 leedongwei head</GridHeadCell>
+          <GridHeadCell isEditing={isEditing}>5 leedongwei head</GridHeadCell>
         </GridRow>
       </GridHead>
     );
@@ -172,3 +153,22 @@ class TableResizable extends React.Component<TableResizableProps, TableResizable
 }
 
 export default TableResizable;
+
+/*
+  Abstracting the complexity of GridHeadCell away.
+ */
+type GridHeadCellProps = {
+  isEditing: boolean;
+  children: React.ReactChild;
+};
+
+const GridHeadCell = (props: GridHeadCellProps) => {
+  const {isEditing} = props;
+
+  return (
+    <GridHeadCellStyle>
+      <GridHeadCellButton isEditing={isEditing}>{props.children}</GridHeadCellButton>
+      <GridHeadCellResizer isEditing={isEditing} />
+    </GridHeadCellStyle>
+  );
+};
