@@ -31,6 +31,7 @@ type GridEditableProps = {
  *
  * <thead>, <tbody>, <tr> are ignored by CSS Grid.
  * The entire layout is determined by the usage of <th> and <td>.
+ *
  */
 export const Grid = styled.table<GridEditableProps>`
   position: relative;
@@ -77,10 +78,8 @@ export const GridHead = styled.thead`
   display: contents;
 `;
 export const GridHeadCell = styled.th`
-  /*
-    By default, a grid item cannot be smaller than the size of its content.
-    We override this by setting min-width to be 0.
-  */
+  /* By default, a grid item cannot be smaller than the size of its content.
+     We override this by setting min-width to be 0. */
   position: relative;
   min-width: 0;
   height: ${GRID_HEADER_HEIGHT};
@@ -199,7 +198,8 @@ export const GridEditGroupButton = styled.div`
     border-left: 1px solid ${p => p.theme.borderDark};
   }
 
-  /* Tooltip */
+  /* Targets ToolTip to ensure that it will fill up the parent element and
+     its child elements will float in its center */
   > span {
     display: flex;
     justify-content: center;
